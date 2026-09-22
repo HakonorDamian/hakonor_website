@@ -135,7 +135,7 @@
     <!-- 1. HERO SECTION -->
     <section class="relative pt-32 pb-24 bg-black overflow-hidden border-b border-neutral-800 min-h-[90vh] flex items-center">
         <div class="max-w-[1440px] mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
-            <div data-aos="fade-right" data-aos-duration="1000">
+            <div class="order-2 md:order-1" data-aos="fade-right" data-aos-duration="1000">
                 <div class="inline-flex items-center space-x-2 bg-neutral-800/60 border border-neutral-500/30 text-white text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
                     <i class="fa-solid fa-shield-halved"></i>
                     <span>Skandynawskie Standardy Bezpieczeństwa</span>
@@ -158,7 +158,7 @@
                     </a>
                 </div>
             </div>
-            <div class="relative" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+            <div class="order-1 md:order-2 relative" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
                 <div class="absolute -inset-1 bg-gradient-to-r from-white/20 to-neutral-500/20 rounded-2xl blur-xl"></div>
                 
                 <!-- Karta główna (kontener) -->
@@ -821,6 +821,62 @@
             });
         });
     });
+</script>
+<!-- Baner Cookies (Tailwind CSS) -->
+<div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md bg-gray-900 border border-gray-800 text-white p-5 rounded-2xl shadow-2xl z-50 transform transition-all duration-300 hidden">
+  <div class="flex items-start gap-4">
+    <!-- Ikona ciasteczka -->
+    <div class="text-2xl shrink-0">🍪</div>
+    
+    <div class="space-y-3">
+      <h3 class="font-semibold text-sm tracking-wide text-gray-100">Ta strona używa plików cookies</h3>
+      <p class="text-xs text-gray-400 leading-relaxed">
+        Używamy plików cookies, aby zapewnić prawidłowe działanie strony oraz analizować ruch. Szczegóły znajdziesz w naszej 
+        <a href="/privacy-policy.html" class="text-blue-400 hover:underline">Polityce Prywatności</a>.
+      </p>
+      
+      <!-- Przyciski akcji -->
+      <div class="flex items-center gap-2 pt-1">
+        <button id="accept-cookies" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition-colors">
+          Akceptuję wszystkie
+        </button>
+        <button id="reject-cookies" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-medium px-4 py-2 rounded-lg transition-colors">
+          Tylko niezbędne
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skrypt obsługi zgody (JavaScript) -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    const rejectBtn = document.getElementById('reject-cookies');
+
+    // Sprawdź czy użytkownik dokonał już wyboru
+    const cookieConsent = localStorage.getItem('hakonor_cookie_consent');
+
+    if (!cookieConsent) {
+      // Pokaż baner z lekkim opóźnieniem
+      setTimeout(() => {
+        cookieBanner.classList.remove('hidden');
+      }, 500);
+    }
+
+    // Obsługa kliknięcia "Akceptuję"
+    acceptBtn.addEventListener('click', function () {
+      localStorage.setItem('hakonor_cookie_consent', 'accepted');
+      cookieBanner.classList.add('hidden');
+    });
+
+    // Obsługa kliknięcia "Tylko niezbędne"
+    rejectBtn.addEventListener('click', function () {
+      localStorage.setItem('hakonor_cookie_consent', 'essential_only');
+      cookieBanner.classList.add('hidden');
+    });
+  });
 </script>
     </body>
 </html>
