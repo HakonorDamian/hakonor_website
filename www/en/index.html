@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden w-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakonor | Leak protection</title>
+    <link rel="icon" type="image/svg+xml" href="../Pictures/hakOnor_icon.svg">
+        
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Wygenerowany lokalnie plik Tailwind CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styl przypisujący czcionkę Montserrat do znaczników h1 -->
+    <style>
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Usunięcie białego tła i ustawienie pełnej czerni wokół w GLightbox */
+        .glightbox-container .gslide-description,
+        .glightbox-container .gslide-inline,
+        .glightbox-container .gslide-desc {
+            background: #000000 !important;
+            background-color: #000000 !important;
+        }
+
+        /* Wymuszenie widoczności i odpowiedniego stylu tekstu opisu */
+        .glightbox-container .gslide-title {
+            display: block !important;
+            color: #ffffff !important;
+            font-size: 16px !important;
+            font-weight: 600 !important;
+            text-align: center !important;
+            padding: 15px 0 !important;
+        }
+
+        /* Wymuszenie natychmiastowej widoczności przycisku i braku wpływu biblioteki AOS */
+        #mobile-menu-button {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+    </style>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+</head>
+<body class="bg-black text-neutral-100 font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden w-full relative">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-neutral-800 transition-all duration-300">
+        <div class="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between">
+            
+            <!-- 1. LEWA STRONA: Logo -->
+            <div class="flex items-center justify-start shrink-0">
+                <a href="#" class="flex items-center">
+                    <img src="../Pictures/hakOnor_Logo.svg" alt="HAKONOR LOGO" class="h-8 md:h-10 object-contain text-white font-bold text-xl">
+                </a>
+            </div>
+
+            <!-- 2. ŚRODEK: Menu nawigacyjne (Desktop) -->
+            <nav class="hidden md:flex items-center justify-center space-x-8 text-sm font-medium">
+                <a href="#certificates" class="text-neutral-400 hover:text-white transition">Certificates</a>
+                <a href="#models" class="text-neutral-400 hover:text-white transition">Products</a>
+                <a href="#projects" class="text-neutral-400 hover:text-white transition">Projects</a>
+                <a href="#contact" class="text-neutral-400 hover:text-white transition">Contact</a>
+            </nav>
+
+            <!-- 3. PRAWA STRONA: Język + Przycisk CTA + Hamburger (Mobile) -->
+            <div class="flex items-center justify-end space-x-4 md:space-x-6 shrink-0">
+                <div class="hidden sm:flex items-center space-x-2 text-sm font-semibold bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">
+                    <span class="text-white font-bold">EN</span>
+                    <span class="text-neutral-600">|</span>
+                    <a href="../no/index.html" class="text-neutral-400 hover:text-white transition">NO</a>
+                    <span class="text-neutral-600">|</span>
+                    <a href="../pl/index.html" class="text-neutral-400 hover:text-white transition">PL</a>
+                </div>
+                <a href="#contact" class="hidden lg:inline-block bg-white hover:bg-neutral-200 text-black font-medium px-5 py-2 rounded-lg transition shadow-lg shadow-white/10">
+                    Request an Offer
+                </a>
+
+                <!-- PRZYCISK HAMBURGERA (Widoczny tylko na mobile) -->
+                <button id="mobile-menu-button" 
+                        class="md:hidden text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-colors" 
+                        aria-label="Open mobile menu"
+                        aria-expanded="false">
+                    <!-- Ikona otwarcia (Hamburger) -->
+                    <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <!-- Ikona zamknięcia (X) -->
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- ROZWIJANA LISTA MOBILNA -->
+        <div id="mobile-menu" class="hidden md:hidden bg-neutral-950 border-b border-neutral-800 px-6 py-6 space-y-4">
+            <nav class="flex flex-col space-y-3">
+                <a href="#certificates" class="mobile-link text-neutral-300 hover:text-white text-base py-2 transition border-b border-neutral-900">Certificates</a>
+                <a href="#models" class="mobile-link text-neutral-300 hover:text-white text-base py-2 transition border-b border-neutral-900">Products</a>
+                <a href="#projects" class="mobile-link text-neutral-300 hover:text-white text-base py-2 transition border-b border-neutral-900">Projects</a>
+                <a href="#contact" class="mobile-link text-neutral-300 hover:text-white text-base py-2 transition">Contact</a>
+            </nav>
+            
+            <div class="pt-4 flex flex-col gap-4 border-t border-neutral-800">
+                <div class="flex items-center justify-center space-x-3 text-sm font-semibold bg-neutral-900 px-2 py-2 rounded-lg border border-neutral-800">
+                    <span class="text-white font-bold">EN</span>
+                    <span class="text-neutral-600">|</span>
+                    <a href="../no/index.html" class="text-neutral-400 hover:text-white transition">NO</a>
+                    <span class="text-neutral-600">|</span>
+                    <a href="../pl/index.html" class="text-neutral-400 hover:text-white transition">PL</a>
+               </div>
+               <a href="#contact" class="mobile-link w-full text-center bg-white hover:bg-neutral-200 text-black font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition">
+                    Request an Offer
+               </a>
+           </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative pt-32 pb-24 bg-black overflow-hidden border-b border-neutral-800 min-h-[90vh] flex items-center">
+        <div class="max-w-[1440px] mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
+            <div data-aos="fade-right" data-aos-duration="1000">
+                <div class="inline-flex items-center space-x-2 bg-neutral-800/60 border border-neutral-500/30 text-white text-xs uppercase tracking-widest px-3 py-1.5 rounded-full mb-6">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Scandinavian Safety Standards</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-tight mb-6">
+                    100% leak protection <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-400">for concealed plumbing installations.</span>
+                </h1>
+                
+                <p class="text-neutral-400 text-lg leading-relaxed mb-8 max-w-xl">
+                    Protect basin, shower, and bathtub mixers. Hakonor is a solution derived from strict Scandinavian plumbing standards. Combined with the "pipe-in-pipe" system, we create a reliable water installation resistant to leaks – ideal for both sensitive timber-frame and masonry construction.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="text-center bg-white hover:bg-neutral-200 text-black font-semibold px-6 py-3.5 rounded-lg transition shadow-lg shadow-white/10">
+                        Request an Offer
+                    </a>
+                    <a href="#solution" class="text-center bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-neutral-800 font-semibold px-6 py-3.5 rounded-lg transition">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="relative" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white/20 to-neutral-500/20 rounded-2xl blur-xl"></div>
+                
+                <div class="relative bg-neutral-950 border border-neutral-800 rounded-2xl p-1 flex flex-col gap-1">
+                    <div class="w-full h-[300px] md:h-[400px] overflow-hidden rounded-xl flex items-center justify-center bg-black/40">
+                        <video autoplay loop muted playsinline class="w-full h-full object-contain opacity-100">
+                            <source src="https://github.com/HakonorDamian/hakonor_website/releases/download/v1.0.0/Web_Front_10.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="text-center p-1 bg-neutral-900/80 rounded-xl border border-neutral-800">
+                        <span class="text-xl font-bold text-white block mb-1">Hakonor Protective System</span>
+                        <p class="text-neutral-300 text-xs">Safety backed by a patent.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. PROBLEM & SOLUTION -->
+    <section id="solution" class="py-24 bg-neutral-900 border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Eliminating the Most Expensive Construction Issues</h2>
+                <p class="text-neutral-400">Leaks from concealed plumbing installations are a hidden threat. Our system solves this problem at the source, regardless of the building technology.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Timber Frame -->
+                <div class="bg-black border border-neutral-800 rounded-2xl p-10 hover:border-neutral-700 transition" data-aos="fade-right">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-white/10 text-white rounded-xl flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Timber Frame Construction</h3>
+                    </div>
+                    <p class="text-neutral-400 leading-relaxed mb-4">
+                        In timber frame structures, the most dangerous hazard is a hidden leak inside the wall. Even a tiny seepage – unnoticed from the outside – causes moisture accumulation.
+                    </p>
+                    <p class="text-neutral-400 leading-relaxed mb-6">
+                        This leads to mold growth and wood rot, ultimately resulting in expensive wall demolition and structural replacement.
+                    </p>
+                    <div class="bg-neutral-900 border-l-4 border-white p-4 rounded-r-lg">
+                        <strong class="text-white block mb-1">The Hakonor Solution:</strong>
+                        <span class="text-neutral-300 text-sm">The box isolates the mixer. Any leak drop is routed through a drainage outlet outside the wall, instantly notifying you of the failure and protecting the structure from rotting.</span>
+                    </div>
+                </div>
+
+                <!-- Masonry -->
+                <div class="bg-black border border-neutral-800 rounded-2xl p-10 hover:border-neutral-700 transition" data-aos="fade-left">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-14 h-14 bg-white/10 text-white rounded-xl flex items-center justify-center text-2xl">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Masonry Construction</h3>
+                    </div>
+                    <p class="text-neutral-400 leading-relaxed mb-4">
+                        In multi-family residential buildings, major issues arise from bathroom water leaks. Thanks to waterproof membranes and tiles, you rarely notice a leak inside your own space.
+                    </p>
+                    <p class="text-neutral-400 leading-relaxed mb-6">
+                        Your neighbor downstairs or behind the wall is usually the first to discover the leak, leaving you facing substantial renovation costs for damaged property.
+                    </p>
+                    <div class="bg-neutral-900 border-l-4 border-white p-4 rounded-r-lg">
+                        <strong class="text-white block mb-1">The Hakonor Solution:</strong>
+                        <span class="text-neutral-300 text-sm">The system traps water inside the box during a leak and routes it safely to a drainage outlet in your own bathroom. Avoid damage, neighbor claims, and high repair costs.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. HOW IT WORKS -->
+    <section id="how-it-works" class="py-24 bg-neutral-100 border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-black mb-4">How Does It Work? Simple and Intuitive Installation</h2>
+                <p class="text-neutral-400">Installing the box inside wall structures is fast and well thought-out. Tailored to meet professional standards.</p>
+            </div>
+            
+            <div class="relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-neutral-400 -translate-y-1/2 z-0"></div>
+                
+                <div class="grid md:grid-cols-4 gap-8 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="bg-neutral-400 border border-neutral-800 rounded-xl p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 mx-auto bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-black/20">1</div>
+                        <h4 class="text-black font-bold mb-2">Frame Mounting</h4>
+                        <p class="text-neutral-800 text-sm">Install the box inside the wall structure. An intuitive process thanks to built-in mounting brackets.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-neutral-400 border border-neutral-800 rounded-xl p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 mx-auto bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-black/20">2</div>
+                        <h4 class="text-black font-bold mb-2">Water & Drainage</h4>
+                        <p class="text-neutral-800 text-sm">Connect the water pipes and the drain pipe that will discharge water in the event of a leak.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-neutral-400 border border-neutral-800 rounded-xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-12 h-12 mx-auto bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-white/20">3</div>
+                        <h4 class="text-black font-bold mb-2">Mixer Installation</h4>
+                        <p class="text-neutral-800 text-sm">Mount the concealed mixer unit inside the box. Fits most leading plumbing brands on the market.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="bg-neutral-400 border border-neutral-800 rounded-xl p-6 text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-12 h-12 mx-auto bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-white/20">4</div>
+                        <h4 class="text-black font-bold mb-2">Sealed Closure</h4>
+                        <p class="text-neutral-800 text-sm">Seal the front completely. Check our documentation and training programs for complete details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ADVANTAGES AND CERTIFICATES -->
+    <section id="certificates" class="py-24 bg-neutral-900 border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            
+            <div class="bg-neutral-950/40 border border-neutral-500/30 rounded-2xl p-8 mb-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center" data-aos="fade-up">
+                
+                <div class="flex flex-col items-center text-center justify-center h-full">
+                    <div class="flex space-x-4 mb-6">
+                        <div class="w-24 h-24 bg-white/10 rounded-xl flex items-center justify-center p-2 border border-neutral-500/20">
+                            <img src="../Pictures/20978g.svg" alt="SINTEF" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80/18181b/fff?text=SINTEF'">
+                        </div>
+                        <div class="w-24 h-24 bg-white/10 rounded-xl flex items-center justify-center p-2 border border-neutral-500/20">
+                            <img src="../Pictures/Patent_norge.webp" alt="Patentstyret" class="max-w-full max-h-full object-contain" onerror="this.src='https://via.placeholder.com/80/18181b/fff?text=PATENT'">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Certified Safety</h3>
+                        <p class="text-neutral-300">Our solution is protected by a Norwegian patent (Patentstyret) and holds a prestigious certificate from the <strong>SINTEF</strong> research institute. The box underwent rigorous testing for 100% water tightness and full compatibility with bathroom waterproofing membrane systems.</p>
+                    </div>
+                </div>
+
+                <div class="relative w-full aspect-video md:aspect-4/3 bg-black rounded-xl overflow-hidden border border-neutral-500/20 shadow-2xl flex items-center justify-center">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="https://github.com/HakonorDamian/hakonor_website/releases/download/v1.0.0/Rotation_Box.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-puzzle-piece text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Universality</h4>
+                    <p class="text-neutral-400 text-sm">The box can be customized to fit any leading bathroom fitting manufacturer on the market.</p>
+                </div>
+                
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-door-open text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Dual-Side Access</h4>
+                    <p class="text-neutral-400 text-sm">Full service access to the concealed unit from both front and back! Repairs can be made without breaking tiles.</p>
+                </div>
+                
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fa-solid fa-eye text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Inspection Window</h4>
+                    <p class="text-neutral-400 text-sm">A rear inspection window allows checking hydraulic connections for leaks even after closing the wall from the front.</p>
+                </div>
+                
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fa-solid fa-sliders text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Smooth Slider Adjustment</h4>
+                    <p class="text-neutral-400 text-sm">Hassle-free installation in standard framing without building extra support elements, allowing easy measurement corrections.</p>
+                </div>
+                
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fa-solid fa-ring text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">PEX Pipe Mounts</h4>
+                    <p class="text-neutral-400 text-sm">Integrated, dedicated pipe holders ensuring a stable and correct placement of PEX installations.</p>
+                </div>
+                
+                <div class="bg-black border border-neutral-800 rounded-xl p-6" data-aos="fade-up" data-aos-delay="600">
+                    <i class="fa-solid fa-layer-group text-white text-2xl mb-4"></i>
+                    <h4 class="text-lg font-bold text-white mb-2">Wall Board Support Brackets</h4>
+                    <p class="text-neutral-400 text-sm">Solid built-in supports engineered specifically for secure mounting of wall boards (XPS / Plasterboard).</p>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto" data-aos="fade-up">
+                <div class="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-neutral-500/20 shadow-2xl flex items-center justify-center">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="https://github.com/HakonorDamian/hakonor_website/releases/download/v1.0.0/Master__1920X1080HD.mp4" type="video/mp4">
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. PRODUCT MODELS -->
+    <section id="models" class="py-24 bg-black border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Available Models</h2>
+                <p class="text-neutral-400">Engineered to meet the requirements of every bathroom layout.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+                
+                <!-- MODEL 35x35 -->
+                <div class="bg-neutral-950 border border-neutral-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-neutral-600 transition" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mb-6 w-full h-48 bg-neutral-100 rounded-xl overflow-hidden border border-neutral-800 relative">
+                        <img src="../Pictures/35x35.webp" alt="Model 35x35" class="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition" onerror="this.src='https://via.placeholder.com/500x300/18181b/fff?text=Model+35x35'">
+                    </div>
+                    <div>
+                        <div class="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center mb-4 gap-2">
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1 rounded-md border border-white">For Washbasins</span>
+                            <span class="text-xl font-bold text-white whitespace-nowrap">35 × 35 cm</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Model Standard</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed">Compact enclosure primarily designed to protect concealed washbasin mixers. Ideal for smaller spaces.</p>
+                    </div>
+                </div>
+
+                <!-- MODEL 35x50 -->
+                <div class="bg-neutral-950 border border-white/40 rounded-2xl p-6 flex flex-col justify-between group relative transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-6 w-full h-48 bg-neutral-100 rounded-xl overflow-hidden border border-neutral-800 relative">
+                        <img src="../Pictures/35x50.webp" alt="Model 35x50" class="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition" onerror="this.src='https://via.placeholder.com/500x300/18181b/fff?text=Model+35x50'">
+                    </div>
+                    <div>
+                        <div class="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center mb-4 gap-2">
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1 rounded-md border border-white">Shower Mixers</span>
+                            <span class="text-xl font-bold text-white whitespace-nowrap">35 × 50 cm</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Model Vertical</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed">Extended version specially built for larger shower and bath mixers. Provides additional space for mounting.</p>
+                    </div>
+                </div>
+
+                <!-- MODEL 50x35 -->
+                <div class="bg-neutral-950 border border-neutral-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-neutral-600 transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-6 w-full h-48 bg-neutral-100 rounded-xl overflow-hidden border border-neutral-800 relative">
+                        <img src="../Pictures/50x35.webp" alt="Model 50x35" class="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition" onerror="this.src='https://via.placeholder.com/500x300/18181b/fff?text=Model+50x35'">
+                    </div>
+                    <div>
+                        <div class="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center mb-4 gap-2">
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1 rounded-md border border-white">Horizontal Setup</span>
+                            <span class="text-xl font-bold text-white whitespace-nowrap">50 × 35 cm</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Model Horizontal</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed">Optimized for horizontal installations. Guarantees safety for horizontal bath and shower mixer configurations.</p>
+                    </div>
+                </div>
+
+                <!-- MODEL 90x35 -->
+                <div class="bg-neutral-950 border border-neutral-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-neutral-600 transition" data-aos="fade-up" data-aos-delay="300">
+                    <div class="mb-6 w-full h-48 bg-neutral-100 rounded-xl overflow-hidden border border-neutral-800 relative">
+                        <img src="../Pictures/90x35.webp" alt="Model 90x35" class="w-full h-full object-contain opacity-100 group-hover:opacity-100 transition" onerror="this.src='https://via.placeholder.com/500x300/18181b/fff?text=Model+90x35'">
+                    </div>
+                    <div>
+                        <div class="flex flex-col 2xl:flex-row justify-between items-start 2xl:items-center mb-4 gap-2">
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1 rounded-md border border-white">Maximum Capacity</span>
+                            <span class="text-xl font-bold text-white whitespace-nowrap">90 × 35 cm</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Model Max</h3>
+                        <p class="text-neutral-400 text-sm leading-relaxed">Our largest box, engineered to secure complex, multi-outlet concealed water installations.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PROJECTS -->
+    <section id="projects" class="py-24 bg-neutral-900 border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Our Projects</h2>
+                <p class="text-neutral-400">See how the innovative Hakonor box performs on real job sites – in residential homes and hotels.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- PHOTO 1 -->
+                <a href="../Projects/1.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Washbasin mixer" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="../Projects/1.webp" alt="Project 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+1'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Washbasin mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 2 -->
+                <a href="../Projects/2.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Washbasin mixer" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="../Projects/2.webp" alt="Project 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+2'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Washbasin mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 3 -->
+                <a href="../Projects/3.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Washbasin mixer" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/3.webp" alt="Project 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+3'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Washbasin mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 4 -->
+                <a href="../Projects/4.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Washbasin mixer" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/4.webp" alt="Project 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+4'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Washbasin mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 5 -->
+                <a href="../Projects/5.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Shower mixer" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="../Projects/5.webp" alt="Project 5" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+5'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Shower mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 6 -->
+                <a href="../Projects/6.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Shower mixer" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="../Projects/6.webp" alt="Project 6" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+6'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Shower mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 7 -->
+                <a href="../Projects/7.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Shower mixer" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/7.webp" alt="Project 7" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+7'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Shower mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 8 -->
+                <a href="../Projects/8.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Bathtub mixer with custom offset for shelf installation" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/8.webp" alt="Project 8" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+8'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Bathtub mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 9 -->
+                <a href="../Projects/9.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Bathtub mixer with custom offset for shelf installation" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/9.webp" alt="Project 9" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+9'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Bathtub mixer</h4>
+                    </div>
+                </a>
+
+                <!-- PHOTO 10 -->
+                <a href="../Projects/10.webp" class="glightbox group relative rounded-xl overflow-hidden aspect-[4/3] bg-neutral-900 block" data-gallery="gallery-realizacje" data-title="Bathtub mixer with custom offset for shelf installation" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="../Projects/10.webp" alt="Project 10" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100" onerror="this.src='https://via.placeholder.com/800x600/18181b/fff?text=Project+10'">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none">
+                        <h4 class="text-white font-bold">Bathtub mixer</h4>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. DOWNLOADS -->
+    <section id="downloads" class="py-24 bg-black border-b border-neutral-800">
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">Downloads</h2>
+                <p class="text-neutral-400">Complete technical documentation, installation manuals, and certificates for industry professionals.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- PDF 1 -->
+                <a href="#" class="block bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900 hover:border-white transition text-center group" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-file-pdf text-4xl text-neutral-600 group-hover:text-red-500 mb-4 transition"></i>
+                    <h4 class="text-white font-bold mb-1">Technical Datasheet</h4>
+                    <span class="text-xs text-neutral-500 block">PDF, 2.4 MB</span>
+                </a>
+                <!-- PDF 2 -->
+                <a href="#" class="block bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900 hover:border-white transition text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-file-pdf text-4xl text-neutral-600 group-hover:text-red-500 mb-4 transition"></i>
+                    <h4 class="text-white font-bold mb-1">Installation Guide</h4>
+                    <span class="text-xs text-neutral-500 block">PDF, 5.1 MB</span>
+                </a>
+                <!-- PDF 3 -->
+                <a href="#" class="block bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900 hover:border-white transition text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-file-pdf text-4xl text-neutral-600 group-hover:text-red-500 mb-4 transition"></i>
+                    <h4 class="text-white font-bold mb-1">SINTEF Certificate</h4>
+                    <span class="text-xs text-neutral-500 block">PDF, 1.1 MB</span>
+                </a>
+                <!-- PDF 4 -->
+                <a href="#" class="block bg-neutral-950 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900 hover:border-white transition text-center group" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fa-solid fa-file-pdf text-4xl text-neutral-600 group-hover:text-red-500 mb-4 transition"></i>
+                    <h4 class="text-white font-bold mb-1">Patent Document</h4>
+                    <span class="text-xs text-neutral-500 block">PDF, 1.8 MB</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. PARTNERS -->
+    <style>
+        @keyframes marquee-smooth {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-33.333%); }
+        }
+        
+        .marquee-track-fixed {
+            display: flex;
+            width: max-content;
+            animation: marquee-smooth 30s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-track-fixed:hover {
+            animation-play-state: paused;
+        }
+
+        #partners {
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden !important;
+        }
+    </style>
+
+    <section id="partners" class="py-16 bg-neutral-100 border-b border-zinc-800 overflow-hidden">
+        <div class="max-w-[1440px] mx-auto px-6 mb-10 text-center" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-black mb-4">We Cooperate With Industry Leaders</h2>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6">
+            <div class="relative w-full overflow-hidden rounded-2xl bg-white border border-zinc-800 py-4">
+            
+            <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+            <div class="marquee-track-fixed flex items-center">
+                
+                <!-- SET 1 -->
+                <div class="flex items-center gap-16 px-8 shrink-0">
+                    <a href="https://www.armaturjonsson.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/armatur_johnsen.webp" alt="Armatur Johnsen" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Armatur+Johnsen'">
+                    </a>
+                    <a href="https://www.cristinarubinetterie.com/en/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/cristina.webp" alt="Cristina" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Cristina'">
+                    </a>
+                    <a href="https://www.innovasjonnorge.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/innovasjon_norge.webp" alt="Innovasjon Norge" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Innovasjon+Norge'">
+                    </a>
+                    <a href="https://italianvibes.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Italian_vibes.webp" alt="Italian Vibes" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Italian+Vibes'">
+                    </a>
+                    <a href="https://www.gfps.com/en-us/products-solutions/systems/jrg-sanipex.html" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/JRG Sanipex.webp" alt="JRG Sanipex" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=JRG+Sanipex'">
+                    </a>
+                    <a href="https://www.sintefcertification.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Sintef.webp" alt="Sintef" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Sintef'">
+                    </a>
+                </div>
+
+                <!-- SET 2 -->
+                <div class="flex items-center gap-16 px-8 shrink-0">
+                    <a href="https://www.armaturjonsson.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/armatur_johnsen.webp" alt="Armatur Johnsen" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Armatur+Johnsen'">
+                    </a>
+                    <a href="https://www.cristinarubinetterie.com/en/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/cristina.webp" alt="Cristina" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Cristina'">
+                    </a>
+                    <a href="https://www.innovasjonnorge.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/innovasjon_norge.webp" alt="Innovasjon Norge" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Innovasjon+Norge'">
+                    </a>
+                    <a href="https://italianvibes.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Italian_vibes.webp" alt="Italian Vibes" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Italian+Vibes'">
+                    </a>
+                    <a href="https://www.gfps.com/en-us/products-solutions/systems/jrg-sanipex.html" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/JRG Sanipex.webp" alt="JRG Sanipex" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=JRG+Sanipex'">
+                    </a>
+                    <a href="https://www.sintefcertification.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Sintef.webp" alt="Sintef" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Sintef'">
+                    </a>
+                </div>
+
+                <!-- SET 3 -->
+                <div class="flex items-center gap-16 px-8 shrink-0">
+                    <a href="https://www.armaturjonsson.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/armatur_johnsen.webp" alt="Armatur Johnsen" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Armatur+Johnsen'">
+                    </a>
+                    <a href="https://www.cristinarubinetterie.com/en/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/cristina.webp" alt="Cristina" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Cristina'">
+                    </a>
+                    <a href="https://www.innovasjonnorge.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/innovasjon_norge.webp" alt="Innovasjon Norge" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Innovasjon+Norge'">
+                    </a>
+                    <a href="https://italianvibes.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Italian_vibes.webp" alt="Italian Vibes" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Italian+Vibes'">
+                    </a>
+                    <a href="https://www.gfps.com/en-us/products-solutions/systems/jrg-sanipex.html" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/JRG Sanipex.webp" alt="JRG Sanipex" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=JRG+Sanipex'">
+                    </a>
+                    <a href="https://www.sintefcertification.no/" target="_blank" rel="noopener noreferrer">
+                        <img src="../Pictures/Sintef.webp" alt="Sintef" class="h-20 w-auto object-contain hover:opacity-85 transition-opacity duration-300" onerror="this.src='https://via.placeholder.com/150x50/000000/71717a?text=Sintef'">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- 9. CONTACT & FOOTER -->
+    <section id="contact" class="pt-24 bg-zinc-950 border-t border-zinc-800">
+        <div class="max-w-4xl mx-auto px-6 mb-24">
+            <div class="bg-black border border-zinc-800 rounded-2xl p-8 md:p-12 shadow-2xl" data-aos="fade-up">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-white mb-2">Book a Training or Request an Offer</h2>
+                    <p class="text-zinc-400 text-sm">Want to see the installation process in practice? Get in touch with us.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Your message has been sent!');">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Full Name / Company</label>
+                            <input type="text" placeholder="John Doe" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" placeholder="contact@yourcompany.com" required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Message / Demonstration Inquiry</label>
+                        <textarea rows="4" placeholder="How can we help you?..." required class="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-white hover:bg-neutral-200 text-black font-bold py-4 rounded-lg transition shadow-lg shadow-white/20">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <footer class="bg-black text-zinc-400 pt-16 pb-8 border-t border-zinc-800">
+            <div class="max-w-[1440px] mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-zinc-900">
+                    <div class="md:col-span-1">
+                        <img src="../Pictures/hakOnor_Logo.svg" alt="HAKONOR LOGO" class="h-8 object-contain mb-4 text-white font-bold" onerror="this.src='https://via.placeholder.com/150x40/000/fff?text=HAKONOR'">
+                        <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                            Certified leak prevention solutions for timber-frame and masonry construction.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-l-2 border-white pl-2">Hakonor Headquarters</h3>
+                        <ul class="space-y-2.5 text-xs">
+                            <li class="font-medium text-white">Hakonor AS</li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-location-dot mt-0.5 mr-2 text-white"></i>
+                                <span>Brobekkveien 80 C<br/>0587 Oslo, Norway</span>
+                            </li>
+
+                            <li class="flex items-center">
+                                <i class="fa-solid fa-id-card mr-2 text-white"></i>
+                                <span>Org. nr: 932 574 608</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4 border-l-2 border-white pl-2">Contact</h3>
+                        <ul class="space-y-3 text-xs">
+                            <li class="flex items-center">
+                                <i class="fa-solid fa-envelope mr-2 text-white"></i>
+                                <a href="mailto:post@hakonor.no" class="hover:text-white transition">post@hakonor.no</a>
+                            </li>
+
+                            <li class="flex items-center">
+                                <i class="fa-solid fa-phone mr-2 text-white"></i>
+                                <a href="tel:+4740000712" class="hover:text-white transition">+47 400 00 712</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pt-8 flex justify-between items-center text-xs text-zinc-500">
+                    <p>© 2026 Hakonor. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+    </script>
+
+    <!-- GLightbox JS -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox'
+        });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = menu.classList.contains('hidden');
+            
+            if (isOpen) {
+                menu.classList.remove('hidden');
+                hamburgerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+                btn.setAttribute('aria-label', 'Close mobile menu');
+            } else {
+                menu.classList.add('hidden');
+                hamburgerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Open mobile menu');
+            }
+        }
+
+        btn.addEventListener('click', toggleMenu);
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!menu.classList.contains('hidden')) {
+                    toggleMenu();
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
