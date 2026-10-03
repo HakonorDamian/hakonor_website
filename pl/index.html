@@ -371,7 +371,7 @@
             </div>
 
             <!-- Siatka zmieniona na 4 kolumny na dużych ekranach -->
-            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mb-16">
                 
                 <!-- MODEL 35x35 -->
                 <div class="bg-neutral-950 border border-neutral-800 rounded-2xl p-6 flex flex-col justify-between group hover:border-neutral-600 transition" data-aos="fade-up" data-aos-delay="0">
@@ -435,6 +435,42 @@
                 </div>
 
             </div>
+
+            <!-- WYEKSPONOWANA INFORMACJA O CUSTOMIZACJI (JASNY KONTRAST) -->
+            <div class="max-w-4xl mx-auto relative group" data-aos="fade-up">
+                <!-- Kontener z jasnym gradientem i miękkim cieniem -->
+                <div class="relative bg-gradient-to-br from-white via-neutral-100 to-neutral-200 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 text-center md:text-left shadow-[0_0_50px_rgba(255,255,255,0.15)] overflow-hidden">
+
+                    <!-- Dekoracyjne, rozmyte koło w tle (optycznie powiększa przestrzeń) -->
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-neutral-300 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+                    <!-- Ikona (Ciemna na jasnym tle) -->
+                    <div class="shrink-0 w-24 h-24 rounded-2xl bg-black flex items-center justify-center text-white text-4xl shadow-2xl transform group-hover:-translate-y-2 transition duration-500 z-10">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    
+                    <!-- Treść -->
+                    <div class="flex-1 z-10">
+                        <!-- Pigułka informacyjna -->
+                        <div class="inline-flex items-center space-x-2 bg-black/5 text-black text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-full mb-5 border border-black/10 font-bold">
+                            <span class="w-2 h-2 rounded-full bg-black animate-pulse"></span>
+                            <span>Usługa Personalizacji</span>
+                        </div>
+                        
+                        <h4 class="text-3xl font-extrabold text-black mb-4 tracking-tight">Pełna kompatybilność</h4>
+                        <p class="text-neutral-700 text-base leading-relaxed mb-8 max-w-2xl">
+                            System Hakonor projektujemy z myślą o pełnej kompatybilności z rozwiązaniami wiodących producentów armatury łazienkowej i kuchennej. Oferujemy usługę personalizacji – <strong class="text-black font-bold">dostosujemy produkt do wybranej przez Ciebie armatury</strong> oraz <strong class="text-black font-bold">zrealizujemy nietypowe wymagania projektowe</strong>. Jesteśmy otwarci na wyzwania zarówno od klientów prywatnych, jak i przy dużych inwestycjach.
+                        </p>
+                        
+                        <!-- CTA (Czarne, masywne) -->
+                        <a href="#contact" class="inline-flex items-center justify-center space-x-3 bg-black hover:bg-neutral-800 text-white font-semibold px-8 py-4 rounded-xl transition text-sm shadow-xl shadow-black/20 group/btn">
+                            <span>Skonsultuj projekt</span>
+                            <i class="fa-solid fa-arrow-right transform group-hover/btn:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
